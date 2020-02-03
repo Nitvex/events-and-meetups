@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Events_and_meetups.Parsers;
+using EventsAndMeetups.Parsers;
 
-namespace Events_and_meetups
+namespace EventsAndMeetups
 {
     public class Program
     {

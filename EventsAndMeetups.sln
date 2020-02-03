@@ -1,7 +1,7 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events_and_meetups", "Events_and_meetups\Events_and_meetups.csproj", "{40F660A1-D1A3-4776-BD29-478E43FC8901}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsAndMeetups", "EventsAndMeetups\EventsAndMeetups.csproj", "{40F660A1-D1A3-4776-BD29-478E43FC8901}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

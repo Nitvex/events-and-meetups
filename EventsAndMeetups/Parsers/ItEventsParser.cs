@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
 
-namespace Events_and_meetups.Parsers
+namespace EventsAndMeetups.Parsers
 {
-    public class ItEventsParser : HTMLParser
+    public class ItEventsParser : IHTMLParser
     {
         public ItEventsParser() {}
 
