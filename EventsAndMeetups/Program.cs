@@ -12,10 +12,10 @@ namespace EventsAndMeetups
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var parser = new ItEventsParser();
-            parser.Parse();
+            await parser.ParseAsync();
             CreateHostBuilder(args).Build().Run();
         }
 

@@ -8,46 +8,24 @@ using System;
 namespace EventsAndMeetups.Parsers
 {
     public class ItEventsParser : IHTMLParser
-    {
-        public ItEventsParser() {}
-
-        public struct Event
-        {
-            readonly string _type, _name, _time, _location;
-
-            public Event(string type, string name, string time, string location)
-            {
-                _type = type;
-                _name = name;
-                _time = time;
-                _location = location;
-            }
-
-            public string toString()
-            {
-                return $"{_name}, {_type} будет проходить {_time}, {_location}";
-            }
-        }
-
-        public async void Parse()
+    { 
+        public async Task ParseAsync()
         {
             var config = Configuration.Default;
             var context = BrowsingContext.New(config);
-            for(int page=0; page <= 10; page++)
+            for (int page = 0; page <= 10; page++)
             {
-                await parsePage(context, getHTMLPageString($"https://it-events.com/?page={page}"));
+                await ParsePageAsync(context, GetHTMLPageString($"https://it-events.com/?page={page}"));
             }
         }
 
-        private string getHTMLPageString(string siteUrl)
+        private string GetHTMLPageString(string siteUrl)
         {
-            using (WebClient client = new WebClient())
-            {
-                return client.DownloadString(siteUrl);
-            }
+            using var client = new WebClient();
+            return client.DownloadString(siteUrl);
         }
 
-        async private Task parsePage(IBrowsingContext context, string htmlString)
+        private async Task ParsePageAsync(IBrowsingContext context, string htmlString)
         {
             var document = await context.OpenAsync(req => req.Content(htmlString));
             var events = document.QuerySelectorAll(".event-list-item");
@@ -55,16 +33,16 @@ namespace EventsAndMeetups.Parsers
 
             foreach (var e in events)
             {
-                parsedEvents.Add(parseEvent(e));
+                parsedEvents.Add(ParseEvent(e));
             }
 
-            foreach(var e in parsedEvents)
+            foreach (var e in parsedEvents)
             {
-                Console.WriteLine(e.toString());
+                Console.WriteLine(e.ToString());
             }
         }
 
-        private Event parseEvent(IElement evnt)
+        private Event ParseEvent(IElement evnt)
         {
             var type = getElementText(evnt, ".event-list-item__type");
             var name = getElementText(evnt, ".event-list-item__title");
@@ -78,6 +56,6 @@ namespace EventsAndMeetups.Parsers
         private string getElementText(IElement evnt, string selector)
         {
             return evnt.QuerySelector(selector)?.InnerHtml.Replace("\n", "") ?? "";
-        }        
+        }
     }
 }
